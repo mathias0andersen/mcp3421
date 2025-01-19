@@ -9,19 +9,19 @@ static const char *const TAG = "mcp3421";
 void MCP3421Sensor::setup() {
   ESP_LOGCONFIG(TAG, "Setting up %s...", this->name_.c_str());
 
-/*  uint16_t manu = 0;
-  if (!this->read_byte_16(MCP9808_REG_MANUF_ID, &manu) || manu != MCP9808_MANUF_ID) {
+  this->set_i2c_address(MCP3421_DEFAULT_ADDR);
+
+  config_.bit.RDY = 0;
+  config_.bit.Cx = 0;
+  config_.bit.OC = 1;
+
+  i2c::ErrorCode retval = this->write(&config_,sizeof(config_));
+  
+  if (retval != i2c::ErrorCode::NO_ERROR) {
     this->mark_failed();
-    ESP_LOGE(TAG, "%s manufacuturer id failed, device returned %X", this->name_.c_str(), manu);
+    ESP_LOGE(TAG, "Communication failed while writing config with return = %d", retval);
     return;
   }
-  uint16_t dev_id = 0;
-  if (!this->read_byte_16(MCP9808_REG_DEVICE_ID, &dev_id) || dev_id != MCP9808_DEV_ID) {
-    this->mark_failed();
-    ESP_LOGE(TAG, "%s device id failed, device returned %X", this->name_.c_str(), dev_id);
-    return;
-  }
-*/
 }
 
 void MCP3421Sensor::dump_config() {

@@ -56,3 +56,6 @@ async def to_code(config):
     var = await sensor.new_sensor(config)
     await cg.register_component(var, config)
     await i2c.register_i2c_device(var, config)
+
+    cg.add(var.set_gain(config[CONF_GAIN]))
+    cg.add(var.set_resolution(config[CONF_RESOLUTION]))
