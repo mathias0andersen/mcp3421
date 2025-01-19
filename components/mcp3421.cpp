@@ -70,5 +70,5 @@ void MCP9808Sensor::update() {
 
 float MCP3421Sensor::get_setup_priority() const { return setup_priority::DATA; }
 
-}  // namespace mcp9808
+}  // namespace mcp3421
 }  // namespace esphome
