@@ -39,11 +39,11 @@ class MCP3421Sensor : public sensor::Sensor, public PollingComponent, public i2c
   void dump_config() override;
   float get_setup_priority() const override;
   void update() override;
-  void set_gain(MCP3421Gain gain) { this->config_.bit.GAIN = gain; }
-  void set_resolution(MCP3421Resolution resolution) { this->config_.bit.SR = resolution; }
- protected:
-//  uint8_t addr_;
-  MCP3421Config config_;
+  void set_gain(MCP3421Gain gain) { this->gain_ = gain; }
+  void set_resolution(MCP3421Resolution resolution) { this->resolution_ = resolution; }
+ private:
+  MCP3421Gain gain_;
+  MCP3421Resolution resolution_;
 };
 
 }  // namespace mcp3421
