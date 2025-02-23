@@ -1,0 +1,5 @@
+name: "MCP3421 Sensor"
+description: "MCP3421 18-bit ADC for ESPHome"
+version: "1.0"
+requirements: []
+dependencies: ["i2c", "sensor"]
