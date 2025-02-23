@@ -38,6 +38,6 @@ void MCP3421Sensor::update() {
     ESP_LOGE(TAG, "Failed to read from MCP3421");
   }
 }
-
+ESPHOME_DEFINE_EXTERNAL_COMPONENT(MCP3421Sensor, "mcp3421", mcp3421::CONFIG_SCHEMA);
 }  // namespace mcp3421
 }  // namespace esphome
