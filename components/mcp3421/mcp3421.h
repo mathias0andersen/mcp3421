@@ -48,3 +48,29 @@ class MCP3421Sensor : public sensor::Sensor, public PollingComponent, public i2c
 
 }  // namespace mcp3421
 }  // namespace esphome
+
+// Add this inside `mcp3421.h`
+#include "esphome/core/component.h"
+#include "esphome/components/i2c/i2c.h"
+#include "esphome/components/sensor/sensor.h"
+
+namespace esphome {
+namespace mcp3421 {
+
+// Define a valid CONFIG_SCHEMA for ESPHome
+static const esphome::schema::Schema CONFIG_SCHEMA = esphome::schema::RootSchema()
+    .Add<int>("sample_width", 18)
+    .Add<bool>("continuous", true)
+    .Add<int>("gain", 1)
+    .Add<int>("update_interval", 60);
+
+class MCP3421Sensor : public esphome::PollingComponent, public esphome::sensor::Sensor, public esphome::i2c::I2CDevice {
+ public:
+  MCP3421Sensor() : PollingComponent(1000) {}  // Read every second
+
+  void setup() override;
+  void update() override;
+};
+
+}  // namespace mcp3421
+}  // namespace esphome
